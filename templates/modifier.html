@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier un Client</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #34495e;
-            --accent-color: #3498db;
-            --background-color: #f4f6f7;
-            --text-color: #2c3e50;
-            --input-border-color: #e0e4e8;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow: 0 8px 20px -4px rgb(0 0 0 / 0.1);
         }
 
         * {
@@ -22,141 +26,164 @@
         }
 
         body {
-            font-family: 'Inter', Arial, sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--gray-100);
+            color: var(--gray-800);
+            line-height: 1.6;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            line-height: 1.6;
-            padding: 2rem 1rem;
+            padding: 1rem;
         }
 
-        .edit-container {
+        .container {
             width: 100%;
             max-width: 500px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-            padding: 2rem;
         }
 
-        .page-header {
+        .card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            background: var(--gray-800);
+            padding: 1.5rem;
             text-align: center;
-            margin-bottom: 2rem;
-            color: var(--primary-color);
         }
 
-        .page-header h1 {
-            font-size: 2rem;
+        .card-header h1 {
+            color: white;
+            font-size: 1.5rem;
             font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+
+        .card-body {
+            padding: 2.5rem;
         }
 
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
-        .form-group label {
+        .form-label {
             display: block;
             margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--secondary-color);
+            font-weight: 500;
+            color: var(--gray-700);
         }
 
         .form-control {
+            display: block;
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--input-border-color);
-            border-radius: 4px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
+            padding: 0.875rem 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 0.75rem;
+            background-color: white;
+            color: var(--gray-800);
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
         }
 
         .form-control:focus {
             outline: none;
-            border-color: var(--accent-color);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
         .btn {
-            display: block;
             width: 100%;
-            padding: 0.75rem;
-            background-color: var(--accent-color);
+            padding: 0.875rem 1.5rem;
+            background-color: var(--primary);
             color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
             font-weight: 600;
+            border-radius: 0.75rem;
+            border: none;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
 
         .btn:hover {
-            background-color: #2980b9;
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
         }
 
         .back-link {
             display: block;
             text-align: center;
             margin-top: 1rem;
-            color: var(--secondary-color);
+            color: var(--primary);
             text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
+            font-weight: 500;
         }
 
         .back-link:hover {
-            color: var(--accent-color);
             text-decoration: underline;
         }
 
         @media (max-width: 600px) {
-            .edit-container {
-                width: 95%;
+            .card {
+                width: 100%;
+                max-width: 100%;
+            }
+            .card-body {
                 padding: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="edit-container">
-        <div class="page-header">
-            <h1>Modifier le Client</h1>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1>Modifier le Client</h1>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="form-group">
+                        <label class="form-label" for="nom">Nom</label>
+                        <input type="text" id="nom" name="nom" class="form-control" value="{{ client.nom }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="prenom">Prénom</label>
+                        <input type="text" id="prenom" name="prenom" class="form-control" value="{{ client.prenom }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="age">Âge</label>
+                        <input type="number" id="age" name="age" class="form-control" value="{{ client.age }}" required min="0" max="120">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="id_region">Région</label>
+                        <select id="id_region" name="id_region" class="form-control">
+                            {% for region in regions %}
+                            <option value="{{ region[0] }}" {% if region[0] == client.ID_region %}selected{% endif %}>
+                                {{ region[1] }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="actions">
+                        <button type="submit" class="btn">Enregistrer les modifications</button>
+                        <a href="/liste_client" class="back-link">Retour à la liste des clients</a>
+                    </div>
+                </form>
+            </div>
         </div>
-
-        <form method="POST">
-            <div class="form-group">
-                <label for="nom">Nom:</label>
-                <input type="text" id="nom" name="nom" class="form-control" value="{{ client.nom }}" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="prenom">Prénom:</label>
-                <input type="text" id="prenom" name="prenom" class="form-control" value="{{ client.prenom }}" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="age">Âge:</label>
-                <input type="number" id="age" name="age" class="form-control" value="{{ client.age }}" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="id_region">Région:</label>
-                <select id="id_region" name="id_region" class="form-control">
-                    {% for region in regions %}
-                    <option value="{{ region[0] }}" {% if region[0] == client.ID_region %}selected{% endif %}>
-                        {{ region[1] }}
-                    </option>
-                    {% endfor %}
-                </select>
-            </div>
-            
-            <button type="submit" class="btn">Modifier le Client</button>
-        </form>
-        
-        <a href="/liste_client" class="back-link">Retour à la liste des clients</a>
     </div>
 </body>
 </html>

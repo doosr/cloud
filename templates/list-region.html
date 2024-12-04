@@ -4,16 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des Régions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #34495e;
-            --accent-color: #3498db;
-            --background-color: #f4f6f7;
-            --text-color: #2c3e50;
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -21,48 +12,45 @@
         }
 
         body {
-            font-family: 'Inter', Arial, sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem 0;
+            font-family: 'Arial', sans-serif;
+            background: #f0f2f5;
+            color: #1a1a1a;
         }
 
         .page-header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1.5rem 0;
+            background: linear-gradient(135deg, #1a365d, #2d3748);
+            padding: 2rem;
             text-align: center;
+            color: white;
             margin-bottom: 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .page-header h1 {
-            font-weight: 600;
             font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
         }
 
         .regions-table {
             width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            background-color: white;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            border-radius: 8px;
+            background: white;
+            border-radius: 0.75rem;
             overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
         }
 
         .regions-table th {
-            background-color: var(--primary-color);
+            background: #2d3748;
             color: white;
-            padding: 1rem;
             text-align: center;
+            padding: 1rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -71,7 +59,7 @@
         .regions-table td {
             padding: 1rem;
             text-align: center;
-            border-bottom: 1px solid #e9ecef;
+            border-bottom: 1px solid #e2e8f0;
         }
 
         .regions-table tr:last-child td {
@@ -79,37 +67,36 @@
         }
 
         .regions-table tr:nth-child(even) {
-            background-color: #f8f9fa;
+            background: #f8fafc;
         }
 
         .regions-table tr:hover {
-            background-color: #f1f3f5;
+            background: #edf2f7;
+            transition: background-color 0.3s;
         }
 
         .page-actions {
             display: flex;
             justify-content: center;
-            margin-top: 2rem;
         }
 
         .back-link {
-            display: inline-block;
             padding: 0.75rem 1.5rem;
-            background-color: var(--secondary-color);
+            background: #2d3748;
             color: white;
             text-decoration: none;
-            border-radius: 4px;
+            border-radius: 0.5rem;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             position: relative;
             overflow: hidden;
         }
 
         .back-link:hover {
-            background-color: #2c3e50;
+            background: #1a365d;
+            transform: translateY(-2px);
         }
 
-        /* Nouvelles animations de bouton */
         .back-link::before {
             content: '';
             position: absolute;
@@ -125,12 +112,6 @@
             left: 100%;
         }
 
-        .back-link:active {
-            transform: scale(0.95);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-
-        /* Animation de clic */
         .click-effect {
             position: absolute;
             border-radius: 50%;
@@ -174,27 +155,15 @@
             <a href="{{ url_for('home') }}" class="back-link" id="homeButton">Retour à l'accueil</a>
         </div>
     </div>
-    
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const homeButton = document.getElementById('homeButton');
-
-            homeButton.addEventListener('click', function(e) {
-                // Créer un effet de cercle au point de clic
-                const circle = document.createElement('span');
-                circle.classList.add('click-effect');
-                
-                // Positionner le cercle exactement où l'utilisateur a cliqué
-                circle.style.left = `${e.offsetX}px`;
-                circle.style.top = `${e.offsetY}px`;
-                
-                this.appendChild(circle);
-
-                // Supprimer le cercle après l'animation
-                setTimeout(() => {
-                    circle.remove();
-                }, 500);
-            });
+        document.getElementById('homeButton').addEventListener('click', function(e) {
+            const circle = document.createElement('span');
+            circle.classList.add('click-effect');
+            circle.style.left = `${e.offsetX}px`;
+            circle.style.top = `${e.offsetY}px`;
+            this.appendChild(circle);
+            setTimeout(() => circle.remove(), 500);
         });
     </script>
 </body>
